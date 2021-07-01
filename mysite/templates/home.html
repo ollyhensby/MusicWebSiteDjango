@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>
+    <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="{% static 'img/favicon/apple-touch-icon.png' %}"
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="{% static 'img/favicon/favicon-32x32.png' %}"
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="{% static 'img/favicon/favicon-16x16.png' %}"
+    />
+    <link rel="manifest" href="img/favicon/site.webmanifest"/>
+    <title>OLLY HENSBY</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+<!-- Header -->
+<header id=header>
+    <div class="header-nav">
+        <h1 class="logo">Olly Hensby</h1>
+        <div class="inner-grid">
+            <nav id="nav-toggle">
+                <div id="nav">
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#song">Songs</a></li>
+                        <li><a href="#video">Videos</a></li>
+                        <li><a href="#bio">Biography</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- HERO -->
+    <section id="hero" class="hero">
+        <div class="container spacing hero__content">
+            <div class="scroll-container">
+                <div class="chevron-click">
+                    <a href="#song"></a>
+                    <div class="chevron"></div>
+                    <div class="chevron"></div>
+                    <div class="chevron"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SONGS -->
+    <section id="song" class="song">
+        <div class="container">
+            <h2 class="section-title">Songs</h2>
+            <div class="song-split">
+                {% for song in songs %}
+                <div class="module">
+                    <div class="song__item">
+                        <a href="{{ song.href }}" target="_blank">
+                            <img src="{{ song.cover.url }}" alt="{{ song.title }}">
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEOS -->
+    <section id="video" class="video">
+        <div class="video-container">
+            <h2 class="section-title">Videos</h2>
+            <div class="video-split">
+                {% for video in videos %}
+                <div class="module">
+                    <div class="video-item">
+                        <iframe
+                                width="1280"
+                                height="720"
+                                src="{{ video.video_link }}"
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                        ></iframe>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- BIOGRAPHY -->
+    <section id="bio" class="bio">
+        <h2 class="section-title">Biography</h2>
+        <div class="container">
+            <div class="bio-container">
+                <div class="bio-img-face module">
+                    <img
+                            src="{% static 'img/olly_face.jpg' %}"
+                            alt=""
+                            data-original="olly_face.jpg"
+                    />
+                </div>
+<!--                <div class="bio-img-stage-and-head module">-->
+<!--                    <img-->
+<!--                            src="./img/olly_music_1.jpg"-->
+<!--                            alt=""-->
+<!--                            data-original="olly_music_1.jpg"-->
+<!--                    />-->
+<!--                    <img-->
+<!--                            src="./img/olly_head.jpg"-->
+<!--                            alt=""-->
+<!--                            data-original="olly_head.jpg"-->
+<!--                    />-->
+<!--                </div>-->
+                <div class="bio-text module">
+                    {% for paragraph in biography %}
+                    <p>
+                        {{ paragraph.bio }}
+                    </p>
+                    <br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="container main-footer-container">
+            <h3 class="band-name" style="color: black">OLLY HENSBY</h3>
+            <ul class="nav footer-nav">
+                <li>
+                    <a
+                            href="https://www.youtube.com/channel/UC1MttgAfTQMgIxDpD0a6HCQ"
+                            target="_blank"
+                    >
+                        <img src="{% static 'img/youtube_logo.png' %}"/>
+                    </a>
+                </li>
+                <li>
+                    <a
+                            href="https://open.spotify.com/artist/3PFSxBAs9mKuhlY5rie2S8"
+                            target="_blank"
+                    >
+                        <img src="{% static 'img/spotify_logo.png' %}"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/ollyhensby/" target="_blank">
+                        <img src="{% static 'img/instagram_logo.png' %}"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</main>
+<script src="{% static 'js/app.js' %}"></script>
+
+</body>
+</html>

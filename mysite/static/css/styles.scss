@@ -1,0 +1,627 @@
+@import url("https://fonts.googleapis.com/css2?family=Recursive&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: "Recursive", sans-serif;
+}
+
+:root {
+  --background: #3b3b3b;
+}
+
+body {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+section {
+  padding: 8em 0;
+}
+
+// Navigation style begins here
+
+nav {
+  position: absolute;
+  text-align: right;
+  top: 100%;
+  right: 0;
+  transform: scale(1, 0);
+  width: 35%;
+  transform-origin: top;
+  transition: transform 400ms ease-in-out;
+
+  & ul {
+    margin: 0;
+    padding: 1em 0 0 0;
+    list-style: none;
+  }
+
+  & li {
+    margin-bottom: 1em;
+    margin-right: 1em;
+  }
+
+  & a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out; //Box not checked so uses this animation
+
+    &:hover {
+      color: #000;
+    }
+  }
+
+  &.toggle {
+    transform: scale(1, 1);
+    transition: transform 200ms ease-in;
+
+    & a {
+      opacity: 1;
+      transition: opacity 250ms ease-in-out 250ms; //Box checked so uses this
+    }
+  }
+}
+
+.header-nav {
+  background-color: transparent;
+  text-align: center;
+  position: fixed;
+  height: inherit;
+  width: 100%;
+  z-index: 1; //In front of hero
+  transition: background-color 1s ease 0s;
+
+  &.solid {
+    background-color: var(--background);
+    transition: background-color 1s ease 0s;
+  }
+}
+
+#nav {
+  background-color: transparent;
+  transition: background-color 1s ease 0s;
+  height: 100%;
+  padding-bottom: 1em;
+
+  &.solid {
+    background-color: var(--background);
+    opacity: 85%;
+    transition: background-color 1s ease 0s;
+  }
+}
+
+.show {
+  transition: transform 0.5s ease-in;
+}
+
+.logo {
+  color: white;
+  margin: 0;
+  font-family: "Amatic SC", cursive;
+  font-size: 4em;
+  //LATER: Adjust height to adjust navbar height
+}
+
+// Burger
+
+.burger {
+  position: absolute;
+  top: 35%; //LOOK HOW TO CENTRE PROPERLY!
+  right: 0;
+  margin-right: 1em;
+  //border: 1px solid red;
+  height: 50%; //Was 100% previously
+  text-align: center;
+  cursor: pointer;
+  //display: none;
+
+  & div {
+    background-color: rgb(255, 255, 255);
+    width: 25px;
+    height: 3px;
+    margin: 5px;
+    transition: all 0.3s ease;
+  }
+
+  &-toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+  &-toggle .line2 {
+    opacity: 0;
+  }
+  &-toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+}
+
+// Hero
+
+.container {
+  width: 85%;
+  max-width: 65em;
+  margin: 0 auto;
+}
+
+.spacing > * + * {
+  margin-top: var(--spacer, 2rem);
+}
+
+.primary-title {
+  font-family: "Amatic SC", cursive;
+  font-size: clamp(5rem, calc(5vw + 1rem), 10rem);
+  line-height: 1.1;
+}
+
+.section-title {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Amatic SC", cursive;
+  font-size: clamp(2.5rem, calc(5vw + 1rem), 4rem);
+  line-height: 1;
+  margin-bottom: 5rem;
+}
+
+@keyframes slideInAbove {
+  0% {
+    transform: translateY(-5%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.hero {
+  animation: 1s ease-out 0s 1 slideInAbove;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+
+  &__content {
+    position: absolute;
+    color: white;
+    text-align: center;
+    bottom: 5px;
+  }
+
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -5;
+
+    @supports (background-blend-mode: multiply) {
+      background-image: url("../img/olly_field_mobile.jpg"),
+        radial-gradient(rgb(133, 133, 133), rgb(187, 187, 187));
+      background-blend-mode: multiply;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      // background-attachment: fixed;
+    }
+
+    @supports not (background-blend-mode: multiply) {
+      background: rgb(77, 77, 77);
+    }
+  }
+}
+
+// Scroll down animation
+$base: 0.6rem;
+
+.scroll-container {
+  display: flex;
+  justify-content: center;
+}
+
+.chevron {
+  position: absolute;
+  width: $base * 3.5;
+  height: $base * 0.8;
+  opacity: 0;
+  transform: scale(0.3);
+  animation: move-chevron 3s ease-out infinite;
+}
+
+.chevron:first-child {
+  animation: move-chevron 3s ease-out 1s infinite;
+}
+
+.chevron:nth-child(2) {
+  animation: move-chevron 3s ease-out 2s infinite;
+}
+
+.chevron:before,
+.chevron:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  background: #ffffff;
+}
+
+.chevron:before {
+  left: 0;
+  transform: skewY(30deg);
+}
+
+.chevron:after {
+  right: 0;
+  width: 50%;
+  transform: skewY(-30deg);
+}
+
+@keyframes move-chevron {
+  25% {
+    opacity: 1;
+  }
+  33.3% {
+    opacity: 1;
+    transform: translateY($base * 3.8);
+  }
+  66.6% {
+    opacity: 1;
+    transform: translateY($base * 5.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY($base * 8) scale(0.5);
+  }
+}
+
+.chevron-click {
+  position: relative;
+  height: 5rem;
+  width: 2.1rem;
+
+  & a {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-decoration: none; /* No underlines on the link */
+    // z-index: 0; /* Places the link above everything else in the div */
+    // background-color: #FFF; /* Fix to make div clickable in IE */
+    // opacity: 0; /* Fix to make div clickable in IE */
+    // filter: alpha(opacity=1); /* Fix to make div clickable in IE */
+  }
+}
+
+// Song section
+.song {
+  background: rgb(236, 236, 236);
+
+  &__item {
+    display: block;
+    position: relative;
+    transform: scale(0.85);
+    transition: transform 250ms ease-in-out;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      transform: scale(1);
+    }
+  }
+
+  &-split {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    & > * {
+      flex-basis: 20%;
+      min-width: 15em;
+    }
+  }
+}
+
+// Video section
+.video {
+  background: rgb(212, 212, 212);
+
+  &-container {
+    width: 85%;
+    max-width: 90em;
+    margin: 0 auto;
+  }
+
+  &-item {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+
+    & iframe,
+    & object,
+    & embed,
+    & video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &-split {
+    display: flex;
+    gap: 5em;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    & > * {
+      flex-basis: 100%;
+      // min-width: 20em;
+    }
+  }
+}
+
+// Bio section
+.bio {
+  background: rgb(255, 255, 255);
+
+  &-container {
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: auto;
+    justify-content: center;
+  }
+
+  &-text {
+    align-items: center;
+    justify-content: center;
+    grid-area: 1 / 1;
+    font-size: clamp(1.5rem, calc(0.5vw + 0.5rem), 2.0rem);
+  }
+
+  &-img {
+    width: 100%;
+    height: auto;
+
+    &-face {
+      grid-area: 2 / 1 / 3 / 1;
+    }
+
+    &-stage-and-head {
+      grid-area: 3 / 1 / 4 / 1;
+      display: grid;
+      grid-gap: 0.5em;
+      grid-template-columns: auto auto;
+    }
+  }
+}
+
+.band-name {
+  text-align: center;
+  margin: 0;
+  font-size: calc(4em + 3vh);
+  font-family: "Amatic SC", cursive;
+  font-weight: normal;
+}
+
+.main-footer {
+  background-color: rgb(109, 177, 109);
+
+  &-container {
+    display: flex;
+    align-items: center;
+
+    & ul {
+      flex-grow: 1;
+      text-align: end;
+    }
+  }
+}
+
+.footer-nav {
+  & li {
+    padding: 0 0.5em;
+  }
+
+  & img {
+    width: 5em;
+    height: auto;
+  }
+}
+
+.nav {
+  & ul {
+    margin: 0;
+  }
+
+  & li {
+    display: inline;
+  }
+
+  & a {
+    display: inline-block;
+    padding: 0.5em;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    transform: scale(0.85);
+    transition: transform 250ms ease-in-out;
+
+    &:hover,
+    &:focus {
+      transform: scale(1);
+    }
+  }
+}
+
+.come-in {
+  transform: translateY(150px);
+  animation: come-in 0.8s ease forwards;
+}
+.come-in:nth-child(odd) {
+  animation-duration: 0.6s; /* So they look staggered */
+}
+
+@keyframes come-in {
+  to {
+    transform: translateY(0);
+  }
+}
+
+//Media screens
+
+@media screen and (min-width: 800px) {
+  .burger {
+    display: none;
+  }
+
+  .header-nav {
+    top: 0;
+    position: fixed;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .inner-grid {
+    grid-column: 2 / 3;
+    display: grid;
+    grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+  }
+
+  .logo {
+    color: white;
+    grid-column: 1 / 2;
+  }
+
+  nav {
+    all: unset;
+    grid-column: 3 / 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & a {
+      opacity: 1;
+      position: relative;
+
+      &::before {
+        content: "";
+        display: block;
+        height: 2px;
+        background: rgb(48, 48, 48);
+        position: relative;
+        top: -0.1em;
+        left: 0;
+        right: 0;
+        transform: scale(0, 1);
+        transition: transform ease-in-out 250ms;
+      }
+
+      &:hover::before {
+        transform: scale(1, 1);
+      }
+    }
+
+    & ul {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    & li {
+      margin: 0 0.5em;
+      // margin-left: 0;
+      // margin-bottom: 0.75em;
+    }
+  }
+
+  #nav {
+    padding-top: 0.5em;
+    &.solid {
+      background-color: transparent;
+      transition: background-color 1s ease 0s;
+    }
+  }
+
+  .hero {
+    &::before {
+      @supports (background-blend-mode: multiply) {
+        background-image: url("../img/olly_field.JPG"),
+          radial-gradient(rgb(133, 133, 133), rgb(187, 187, 187));
+        background-blend-mode: multiply;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        // background-attachment: fixed;
+      }
+
+      @supports not (background-blend-mode: multiply) {
+        background: rgb(77, 77, 77);
+      }
+    }
+  }
+  // Bio section
+  .bio {
+    &-container {
+      grid-template-columns: auto auto;
+    }
+
+    &-text {
+      align-items: center;
+      justify-content: center;
+      grid-area: 1 / 2 / 4 / 2;
+      font-size: clamp(0.5rem, calc(0.5vw + 0.5rem), 1rem);
+      
+    }
+
+    &-img {
+      width: 100%;
+      height: auto;
+
+      &-face {
+        grid-area: 1 / 1 / 3 / 1;
+      }
+
+      &-stage-and-head {
+        grid-area: 2 / 2 / 3 / 2;
+        display: grid;
+        grid-gap: 0.5em;
+        grid-template-columns: auto auto;
+      }
+    }
+  }
+
+  .video {  
+    &-split {
+      & > * {
+        flex-basis: 70%;
+      }
+    }
+  }
+
+}
