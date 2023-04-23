@@ -1,0 +1,9 @@
+name: music-website-django-dev
+
+dependencies:
+  - python>=3.10
+  - django
+  - django-extensions
+  - django-cleanup
+  - pillow
+  - pytest
