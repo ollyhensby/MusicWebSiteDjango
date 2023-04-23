@@ -19,8 +19,8 @@ from django.urls import path, include
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('music_page.urls')),
+    path("admin/", admin.site.urls),
+    path("", include("app.urls")),
 ]
 
 if settings.DEBUG:
