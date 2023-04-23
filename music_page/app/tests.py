@@ -1,5 +1,4 @@
 from django.test import TestCase
-from django.utils import timezone
 from app.models import SongPost, VideoPost, BioPost
 import tempfile
 
