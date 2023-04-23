@@ -1,12 +1,9 @@
 from django.db import models
 
 
-# Create your models here.
-
-
 class SongPost(models.Model):
     title = models.TextField()
-    cover = models.ImageField(upload_to='images/')
+    cover = models.ImageField(upload_to="images/")
     href = models.URLField(max_length=200, null=True)
 
     def __str__(self):
