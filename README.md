@@ -2,7 +2,7 @@
 
 ## Deployed Website
 
-To see the website deployed, visit https://ollyhensby.com/. (Assuming I remember to paid the service to host it 🙂)
+To see the website deployed, visit https://ollyhensby.com/. (Assuming I have remembered to pay the service to host it 🙂)
 
 ## Installing Development Environment
 
